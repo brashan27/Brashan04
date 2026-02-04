@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para ti...</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif; /* Una fuente más clásica para una carta */
+            background-color: hsl(38, 75%, 56%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .carta-container {
+            background-color: rgb(255, 255, 255);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            overflow: hidden; /* Para el efecto de máquina de escribir */
+        }
+        .titulo {
+            color: #d14747; /* Un rojo suave */
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        .texto-carta {
+            white-space: pre-wrap; /* Para respetar saltos de línea y espacios */
+            overflow: hidden; /* Oculta el texto hasta que se revele */
+            border-right: .15em solid orange; /* Cursor de máquina de escribir */
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            display: inline-block; /* Importante para el cursor */
+            vertical-align: top; /* Asegura que el cursor esté en la línea correcta */
+            text-align: left; /* Alinea el texto a la izquierda dentro del bloque */
+        }
+        .boton {
+            background-color: #d14747;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none; /* Si es un link */
+            display: inline-block; /* Para centrar si está solo */
+            margin-top: 20px;
+            opacity: 0; /* Empieza oculto */
+            animation: fadeIn 1s forwards 45.5s; /* Aparece después de 36s (ajusta según la duración de la escritura) */
+        }
+        .boton:hover {
+            background-color: #b33939;
+        }
+
+        /* Animación del cursor */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: orange; }
+        }
+        /* Animación para el botón */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="carta-container">
+        <h1 class="titulo">Para la chica que se robo mi corazón❤️</h1>
+        <p class="texto-carta" id="carta-contenido"></p>
+        <a href="https://wa.me/51933848110" target="_blank" class="boton">Aqui me respondes🌚</a>
+    </div>
+
+    <script>
+        const textoCompleto = `Hola mi amor:3,
+
+No se como empezar pero tratare de que sea breve, desde hace tiempo me hubiera gustado que esta historia sea "oficial" pero todo debia ser a su debido momento 
+
+Esperarnos todo este tiempo fue necesario para que estemos bien los dos y creo que fue una buena decision que tomamos, esperar a que te sientas lista fue una de las mejores decisiones que tome,
+aunque hubieron momentos dificiles en el que nos separamos por un tiempo sirvieron para darnos cuenta que a pesar de todo seguimos aca, gracias a eso pienso que la mejor manera de estar juntos es esperar un tiempo separados.
+
+Para terminar quiero decirte que te quiero mucho, era una chica increible me traes enamorado de ti en todo aspecto,
+hace 2 años empezo esta linda historia ahora no quiero que acabe, quiero que esta sea nuestra historia de amor en la que seamos felices,
+dicho todo esto me tomo el atrevimiento de preguntarte...
+
+¿Quieres ser mi enamorada? ❤️`;
+
+        const cartaContenido = document.getElementById('carta-contenido');
+        let i = 0;
+        const velocidad = 40; // milisegundos por letra
+
+        function escribirCarta() {
+            if (i < textoCompleto.length) {
+                cartaContenido.innerHTML += textoCompleto.charAt(i);
+                i++;
+                setTimeout(escribirCarta, velocidad);
+            } else {
+                // Una vez que termina de escribir, podemos quitar el cursor
+                cartaContenido.style.borderRight = 'none';
+            }
+        }
+
+        escribirCarta(); // Iniciar la animación
+    </script>
+</body>
+</html>
